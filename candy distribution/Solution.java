@@ -10,9 +10,11 @@ public class Solution {
 
     // Complete the candies function below.
     static long candies(int n, int[] arr) {
-        int sum=1;
-        int count=0;
-        int previouscandy=1;
+        long sum=1;
+        long count=0;
+        long previouscandy=1;
+        long bigflips=0;
+        long highestbid=0;
         for(int i=0;i<arr.length-1;i++)
         {
             if(arr[i+1]>arr[i])
@@ -20,6 +22,8 @@ public class Solution {
                 previouscandy++;
                 sum=sum+previouscandy;
                 count=0;
+                highestbid=0;
+                bigflips=0;
             }
             else if(arr[i+1]==arr[i])
             {
@@ -29,8 +33,14 @@ public class Solution {
             }
             else if(arr[i+1]<arr[i])
             {
+                if(bigflips==0)
+                    highestbid=previouscandy;
+                bigflips++;
                 count++;
-                sum=sum+count+1;
+                if(highestbid<=bigflips)
+                    sum=sum+count+1;
+                else
+                    sum=sum+count;
                 previouscandy=1;
             }
         }
