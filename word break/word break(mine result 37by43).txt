@@ -1,0 +1,29 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean status=false;
+        if(wordDict.contains(s))
+        {
+            status= true;
+            return status;
+        }
+        String tmp="";
+        for(int i=0;i<s.length();i++)
+        {
+            tmp=tmp+s.charAt(i);
+            if(wordDict.contains(tmp)&&i==s.length()-1)
+            {
+                status=true;
+                return status;
+            }
+            else if(wordDict.contains(tmp)&&i!=s.length()-1)
+            {
+                if(wordBreak(s.substring(i+1),wordDict))
+                {
+                    status=true;
+                    return status;
+                }
+            }
+        }
+        return status;
+    }
+}
